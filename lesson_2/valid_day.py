@@ -35,3 +35,4 @@ print valid_day('15')
 # => 15
 print valid_day('500')
 # => None
+print valid_day('')
