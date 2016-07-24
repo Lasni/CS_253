@@ -13,33 +13,12 @@
 # limitations under the License.
 
 import webapp2
-import cgi
 
-
-def valid_year(year):
-    if year and year.isdigit():
-        year = int(year)
-        if 1900 <= year <= 2020:
-            return year
-    return None
-
-
-def valid_month(month):
-    if month:
-        short_month = month[:3].lower()
-        return month_abv.get(short_month)
-
-
-def valid_day(day):
-    if day and day.isdigit():
-        day = int(day)
-        if 1 <= day <= 31:
-            return day
-    return None
-
-
-def escape_html(s):
-    return cgi.escape(s, quote=True)
+from lesson_2.html_escaping import escape_html
+from lesson_2.valid_day import valid_day
+from lesson_2.valid_month import valid_month
+from lesson_2.valid_year import valid_year
+from lesson_2 import rot_13
 
 
 class MainPage(webapp2.RequestHandler):
@@ -80,7 +59,7 @@ class ThanksHandler(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
-    ('/', MainPage), ('/thanks', ThanksHandler)], debug=True)
+    ('/', MainPage), ('/thanks', ThanksHandler), ('/rot13'), rot_13.Rot13], debug=True)
 
 form = """
 <form method="post">
