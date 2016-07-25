@@ -59,7 +59,7 @@ class ThanksHandler(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
-    ('/', MainPage), ('/thanks', ThanksHandler), ('/rot13'), rot_13.Rot13], debug=True)
+    ('/', MainPage), ('/thanks', ThanksHandler), ('/rot13', rot_13.Rot13)], debug=True)
 
 form = """
 <form method="post">

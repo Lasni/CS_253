@@ -13,11 +13,9 @@ class Rot13(webapp2.RequestHandler):
       <body>
         <h2>Enter some text to ROT13:</h2>
         <form method="post">
-          <textarea name="text"
-                    style="height: 100px; width: 400px;">
-          </textarea>
+          <textarea name="text" style="height: 100px; width: 400px;">%(text)s</textarea>
           <br>
-          <input type="submit">
+          <input type="submit" value="submit">
         </form>
       </body>
     </html>
