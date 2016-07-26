@@ -24,23 +24,24 @@ class MainPage(webapp2.RequestHandler):
         self.response.headers["Content-Type"] = "text/html"
         self.response.write(form)
 
+    def post(self):
+        val_date = self.request.get('date-val')
+        rot13 = self.request.get('rot13')
+        if val_date:
+            self.redirect('/date-val')
+        elif rot13:
+            self.redirect('/rot13')
+
+
 app = webapp2.WSGIApplication([
-    ('/', MainPage), ('/date-validation', date_validation.ValidateDates),
+    ('/', MainPage), ('/date-val', date_validation.ValidateDates),
     ('/thanks', date_validation.ThanksHandler), ('/rot13', rot_13.Rot13)], debug=True)
 
 form = """
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Main page</title>
-    </head>
-    <body>
-        <button>Date validation</button> <button>ROT 13</button>
-        <br>
-        <button>three</button> <button>four</button>
-    </body>
-    </html>
+<form method="post">
+    <input type="submit" name="date-val" value="date validation">
+    <input type="submit" name="rot13" value="rot13">
+</form>
 """
 
 
