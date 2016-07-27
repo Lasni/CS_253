@@ -38,9 +38,12 @@ class MainPage(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
-    ('/', MainPage), ('/date-val', date_validation.ValidateDates),
-    ('/thanks', date_validation.ThanksHandler), ('/rot13', rot_13.Rot13),
-    ('/user-signup', user_signup.UserSignup)], debug=True)
+    ('/', MainPage),
+    ('/date-val', date_validation.ValidateDates),
+    ('/thanks', date_validation.ThanksHandler),
+    ('/rot13', rot_13.Rot13),
+    ('/user-signup', user_signup.UserSignup),
+    ('/welcome', user_signup.WelcomeHandler)], debug=True)
 
 form = """
 <form method="post">
