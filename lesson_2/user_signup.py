@@ -6,7 +6,7 @@ signup_form = """
 
 <html>
     <head>
-        <title>Unit 2 Signup Form</title>
+        <title>Signup Form</title>
     </head>
 
     <body>
@@ -46,7 +46,7 @@ welcome_form = """
         </head>
 
         <body>
-            <h2>Welcome, %s!</h2>
+            <h2>Welcome, %(username)s!</h2>
         </body>
     </html>
 """
@@ -108,7 +108,7 @@ class UserSignup(webapp2.RequestHandler):
             email_bool = False
 
         if usr_bool and pass_bool and email_bool and (password == verify_pass):
-            self.redirect('/welcome?username=%s' % username)
+            self.redirect('/welcome?username=' + username)
         else:
             self.write_form(username, password, verify_pass, email,
                             usr_err, pass_err, ver_err, email_err)
@@ -117,4 +117,7 @@ class UserSignup(webapp2.RequestHandler):
 class WelcomeHandler(webapp2.RequestHandler):
     def get(self):
         username = self.request.get('username')
-        self.response.out.write(welcome_form % username)
+        if valid_username(username):
+            self.response.out.write(welcome_form % {'username': username})
+        else:
+            self.redirect('/')
