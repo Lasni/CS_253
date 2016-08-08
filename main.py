@@ -18,6 +18,7 @@ import webapp2
 from lesson_2 import rot_13
 from lesson_2 import date_validation
 from lesson_2 import user_signup
+from lesson_2 import shopping_list
 
 
 class MainPage(webapp2.RequestHandler):
@@ -29,12 +30,15 @@ class MainPage(webapp2.RequestHandler):
         val_date = self.request.get('date-val')
         rot13 = self.request.get('rot13')
         signup = self.request.get('user-signup')
+        shpng_lst = self.request.get('shopping-list')
         if val_date:
             self.redirect('/date-val')
         elif rot13:
             self.redirect('/rot13')
         elif signup:
             self.redirect('/user-signup')
+        elif shpng_lst:
+            self.redirect('/shopping-list')
 
 
 app = webapp2.WSGIApplication([
@@ -43,13 +47,15 @@ app = webapp2.WSGIApplication([
     ('/thanks', date_validation.ThanksHandler),
     ('/rot13', rot_13.Rot13),
     ('/user-signup', user_signup.UserSignup),
-    ('/welcome', user_signup.WelcomeHandler)], debug=True)
+    ('/welcome', user_signup.WelcomeHandler),
+    ('/shopping-list', shopping_list.ShoppingListHandler)], debug=True)
 
 form = """
 <form method="post">
     <input type="submit" name="date-val" value="date validation">
     <input type="submit" name="rot13" value="rot13">
     <input type="submit" name="user-signup" value="user signup">
+    <input type="submit" name="shopping-list" value="shopping list">
 </form>
 """
 
