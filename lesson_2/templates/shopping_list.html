@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Shopping list</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+
+
+{% block content %}
     <form>
         <h2>Add a food</h2>
         <input type="text" name="food">
@@ -26,10 +24,5 @@
             </ul>
         {% endif %}
 
-
-
-
-
     </form>
-</body>
-</html>
+{% endblock %}

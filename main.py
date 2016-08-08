@@ -19,6 +19,7 @@ from lesson_2 import rot_13
 from lesson_2 import date_validation
 from lesson_2 import user_signup
 from lesson_2 import shopping_list
+from lesson_2 import fizzbuzz
 
 
 class MainPage(webapp2.RequestHandler):
@@ -31,6 +32,7 @@ class MainPage(webapp2.RequestHandler):
         rot13 = self.request.get('rot13')
         signup = self.request.get('user-signup')
         shpng_lst = self.request.get('shopping-list')
+        fizzbuzz = self.request.get('fizzbuzz')
         if val_date:
             self.redirect('/date-val')
         elif rot13:
@@ -39,6 +41,8 @@ class MainPage(webapp2.RequestHandler):
             self.redirect('/user-signup')
         elif shpng_lst:
             self.redirect('/shopping-list')
+        elif fizzbuzz:
+            self.redirect('/fizzbuzz')
 
 
 app = webapp2.WSGIApplication([
@@ -48,7 +52,8 @@ app = webapp2.WSGIApplication([
     ('/rot13', rot_13.Rot13),
     ('/user-signup', user_signup.UserSignup),
     ('/welcome', user_signup.WelcomeHandler),
-    ('/shopping-list', shopping_list.ShoppingListHandler)], debug=True)
+    ('/shopping-list', shopping_list.ShoppingListHandler),
+    ('/fizzbuzz', fizzbuzz.FizzBuzzHandler)], debug=True)
 
 form = """
 <form method="post">
@@ -56,6 +61,8 @@ form = """
     <input type="submit" name="rot13" value="rot13">
     <input type="submit" name="user-signup" value="user signup">
     <input type="submit" name="shopping-list" value="shopping list">
+    <input type="submit" name="fizzbuzz" value="fizzbuzz">
+
 </form>
 """
 
