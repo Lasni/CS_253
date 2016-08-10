@@ -13,13 +13,12 @@
 # limitations under the License.
 
 import webapp2
-
-
 from lesson_2 import rot_13
 from lesson_2 import date_validation
 from lesson_2 import user_signup
 from lesson_2 import shopping_list
 from lesson_2 import fizzbuzz
+from lesson_3 import ascii
 
 
 class MainPage(webapp2.RequestHandler):
@@ -33,6 +32,7 @@ class MainPage(webapp2.RequestHandler):
         signup = self.request.get('user-signup')
         shpng_lst = self.request.get('shopping-list')
         fizzbuzz = self.request.get('fizzbuzz')
+        ascii_art = self.request.get('ascii-art')
         if val_date:
             self.redirect('/date-val')
         elif rot13:
@@ -43,6 +43,8 @@ class MainPage(webapp2.RequestHandler):
             self.redirect('/shopping-list')
         elif fizzbuzz:
             self.redirect('/fizzbuzz')
+        elif ascii_art:
+            self.redirect('/ascii-art')
 
 
 app = webapp2.WSGIApplication([
@@ -53,7 +55,8 @@ app = webapp2.WSGIApplication([
     ('/user-signup', user_signup.UserSignup),
     ('/welcome', user_signup.WelcomeHandler),
     ('/shopping-list', shopping_list.ShoppingListHandler),
-    ('/fizzbuzz', fizzbuzz.FizzBuzzHandler)], debug=True)
+    ('/fizzbuzz', fizzbuzz.FizzBuzzHandler),
+    ('/ascii-art', ascii.AsciiHandler)], debug=True)
 
 form = """
 <form method="post">
@@ -62,6 +65,7 @@ form = """
     <input type="submit" name="user-signup" value="user signup">
     <input type="submit" name="shopping-list" value="shopping list">
     <input type="submit" name="fizzbuzz" value="fizzbuzz">
+    <input type="submit" name="ascii-art" value="ascii-art">
 
 </form>
 """

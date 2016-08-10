@@ -1,8 +1,8 @@
 import webapp2
-from lesson_2.html_escaping import escape_html
-from lesson_2.valid_day import valid_day
-from lesson_2.valid_month import valid_month
-from lesson_2.valid_year import valid_year
+from lesson_2.quizzes.html_escaping import escape_html
+from lesson_2.quizzes.valid_day import valid_day
+from lesson_2.quizzes.valid_year import valid_year
+from lesson_2.quizzes.valid_month import valid_month
 
 form = """
 <form method="post">
