@@ -35,7 +35,7 @@ class MainPage(webapp2.RequestHandler):
         shpng_lst = self.request.get('shopping-list')
         fizzbuzz = self.request.get('fizzbuzz')
         ascii_art = self.request.get('ascii-art')
-        blog = self.request.get('blog')
+        blog = self.request.get('go-to-blog')
         if val_date:
             self.redirect('/date-val')
         elif rot13:
@@ -74,7 +74,7 @@ form = """
     <input type="submit" name="shopping-list" value="shopping list">
     <input type="submit" name="fizzbuzz" value="fizzbuzz">
     <input type="submit" name="ascii-art" value="ascii-art">
-    <input type="submit" name="blog" value="blog">
+    <input type="submit" name="go-to-blog" value="blog">
 </form>
 """
 
