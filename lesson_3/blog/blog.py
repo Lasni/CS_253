@@ -10,7 +10,7 @@ jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(template_d
 
 
 def blog_key(name='default'):
-    return db.Key.from_path('blogs', name)
+    return db.Key.from_path('blog', name)
 
 
 def render_str(template, **params):
