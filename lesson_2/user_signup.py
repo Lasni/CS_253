@@ -120,4 +120,4 @@ class WelcomeHandler(webapp2.RequestHandler):
         if valid_username(username):
             self.response.out.write(welcome_form % {'username': username})
         else:
-            self.redirect('/')
+            self.redirect('/user-signup')
