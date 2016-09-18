@@ -5,8 +5,8 @@ api_version: 1
 threadsafe: yes
 
 handlers:
-- url: /lesson_3/blog/css/
-  static_dir: /lesson_3/blog/css
+- url: /lesson_3/blog/css
+  static_dir: lesson_3/blog/css/
 - url: /.*
   script: main.app
 
