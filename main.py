@@ -21,6 +21,7 @@ from lesson_2 import shopping_list
 from lesson_2 import user_signup
 from lesson_3 import ascii
 from lesson_3.blog import blog
+from lesson_3.blog_2 import blog_2
 
 
 class MainPage(webapp2.RequestHandler):
@@ -36,6 +37,7 @@ class MainPage(webapp2.RequestHandler):
         fizzbuzz = self.request.get('fizzbuzz')
         ascii_art = self.request.get('ascii-art')
         blog = self.request.get('go-to-blog')
+        blog_2 = self.request.get('blog-2')
         if val_date:
             self.redirect('/date-val')
         elif rot13:
@@ -50,6 +52,8 @@ class MainPage(webapp2.RequestHandler):
             self.redirect('/ascii-art')
         elif blog:
             self.redirect('/blog')
+        elif blog_2:
+            self.redirect('/blog-2')
 
 
 app = webapp2.WSGIApplication([
@@ -63,8 +67,11 @@ app = webapp2.WSGIApplication([
     ('/fizzbuzz', fizzbuzz.FizzBuzzHandler),
     ('/ascii-art', ascii.AsciiHandler),
     ('/blog', blog.BlogFront),
-    ('/blog/([0-9])+', blog.PostPage),
-    ('/blog/newpost', blog.NewPost)], debug=True)
+    ('/blog/([0-9]+)', blog.PostPage),
+    ('/blog/newpost', blog.NewPost),
+    ('/blog-2', blog_2.BlogFront),
+    ('/blog-2/newpost', blog_2.NewPost),
+    ('/blog-2/([0-9]+)', blog_2.PostPage)], debug=True)
 
 form = """
 <form method="post">
@@ -75,6 +82,7 @@ form = """
     <input type="submit" name="fizzbuzz" value="fizzbuzz">
     <input type="submit" name="ascii-art" value="ascii-art">
     <input type="submit" name="go-to-blog" value="blog">
+    <input type="submit" name="blog-2" value="blog-2">
 </form>
 """
 
