@@ -18,9 +18,9 @@ def render_str(template, **params):
     return t.render(params)
 
 
-def render_post(response, post):
-    response.out.write('<b>' + post.subject + '</b><br>')
-    response.out.write(post.content)
+# def render_post(response, post):
+#     response.out.write('<b>' + post.subject + '</b><br>')
+#     response.out.write(post.content)
 
 
 class BlogHandler(webapp2.RequestHandler):
