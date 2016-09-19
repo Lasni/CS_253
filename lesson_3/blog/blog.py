@@ -48,19 +48,21 @@ class Post(db.Model):
     created = db.DateTimeProperty(auto_now_add=True)
     last_modified = db.DateTimeProperty(auto_now=True)
 
-    # render method that uses the above defined global render_str function
+    # Render method that uses the above defined global render_str function
     def render(self):
-        # each time that we render the template with params, we also replace all the newlines in the content with <br>
+        # Each time that we render the template with params, we also replace all the newlines in the content with <br>
         self.rerender_text = self.content.replace('\n', '<br>')
         return render_str('post.html', p=self)
 
 
+# Class that fetches 10 latest blog posts
 class BlogFront(BlogHandler):
     def get(self):
         posts = db.GqlQuery('SELECT * FROM Post ORDER BY created DESC LIMIT 10')
         self.render('front.html', posts=posts)
 
 
+# Class for fetching the post that corresponds to its post_id
 class PostPage(BlogHandler):
     def get(self, post_id):
         key = db.Key.from_path('Post', int(post_id), parent=blog_key())
@@ -73,6 +75,7 @@ class PostPage(BlogHandler):
         self.render('permalink.html', post=post)
 
 
+# Class that fetches the subject and content data, creates a Post object with it, writes it and redirects to a new page
 class NewPost(BlogHandler):
     def get(self):
         self.render('newpost.html')
