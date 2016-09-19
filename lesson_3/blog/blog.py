@@ -3,17 +3,22 @@ import jinja2
 import os
 from google.appengine.ext import db
 
-
+# locate the folder where the templates are and assign it to a variable
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
+# load said templates and store them in a variable
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
                                        autoescape=True)
 
 
+# NEED MORE INFO
 def blog_key(name='default'):
     return db.Key.from_path('blog', name)
 
 
 def render_str(template, **params):
+    """ Global function for rendering a template with params.
+        Needed for use inside the Post class that doesn't inherit from BlogHandler class.
+    """
     t = jinja_environment.get_template(template)
     return t.render(params)
 
@@ -23,24 +28,29 @@ def render_str(template, **params):
 #     response.out.write(post.content)
 
 
+# Main BlogHandler class with methods for rendering the templates with params
 class BlogHandler(webapp2.RequestHandler):
     def write(self, *args, **kwargs):
         self.response.out.write(*args, **kwargs)
 
-    def render_str(self, template, **params):
+    @staticmethod
+    def render_str(template, **params):
         return render_str(template, **params)
 
     def render(self, template, **kwargs):
         self.write(self.render_str(template, **kwargs))
 
 
+# Post class that stores data queried from the database
 class Post(db.Model):
     subject = db.StringProperty(required=True)
     content = db.TextProperty(required=True)
     created = db.DateTimeProperty(auto_now_add=True)
     last_modified = db.DateTimeProperty(auto_now=True)
 
+    # render method that uses the above defined global render_str function
     def render(self):
+        # each time that we render the template with params, we also replace all the newlines in the content with <br>
         self.rerender_text = self.content.replace('\n', '<br>')
         return render_str('post.html', p=self)
 
