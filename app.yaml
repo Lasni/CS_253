@@ -7,8 +7,6 @@ threadsafe: yes
 handlers:
 - url: /lesson_3/blog/css
   static_dir: lesson_3/blog/css/
-- url: /lesson_3/blog_2/blog_2_css
-  static_dir: lesson_3/blog_2/blog_2_css/
 - url: /.*
   script: main.app
 
